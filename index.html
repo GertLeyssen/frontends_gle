@@ -1,0 +1,76 @@
+<html>
+
+<head>
+	<title>Chart Example</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="js/chart.js"></script>
+    <script src="js/forms.js"></script>
+</head>
+
+<body>
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Forecast evaluation</a>
+          <a class="navbar-brand" href="#">Netcdf viewer</a>
+          <a class="navbar-brand" href="#">Netcdf creator</a>
+
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Foreast evaluation</h1>
+        <p>This app enables the comparison of the forecast results with measurements</p>
+      </div>
+    </div>
+
+    <div class="container">
+    <h1>Input</h1>
+        <div class="row">
+                <h2>INPUT</h2>
+                <div class="form-area">
+                    <form role="Forecast">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="api" name="api" placeholder="api" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="variable" name="variable" placeholder="variable" required>
+                        </div>
+
+                        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">plot data</button>
+                    </form>
+                </div>
+            </div>
+
+
+        <h1>Chart</h1>
+
+
+
+        <div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto">
+
+        </div>
+    </div>
+
+</body>
+
+</html>
