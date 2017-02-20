@@ -38,7 +38,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Foreast evaluation</h1>
+        <h1>Forecast evaluation</h1>
         <p>This app enables the comparison of the forecast results with measurements</p>
       </div>
     </div>
@@ -52,15 +52,25 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="api" name="api" placeholder="api" required>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="variable" name="variable" placeholder="variable" required>
-                        </div>
-
-                        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">plot data</button>
+                        <label>Select your site</label>
+                        <select class="form-control" id="site" name="site">
+                            <option value=""></option>
+                        </select>
+                        <label>Select your variable</label>
+                        <select class="form-control" id="variable" name="variable">
+                            <option value=""></option>
+                        </select>               
+                        <span id="mySelected"></span>
+                        
+                        
+                        
                     </form>
+                    <button type="button" id="plot_data" name="plot_data" class="btn btn-primary pull-right">plot data</button>
                 </div>
-            </div>
+        </div>
 
+
+    </div class="row">
 
         <h1>Chart</h1>
 

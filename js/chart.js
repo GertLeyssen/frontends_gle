@@ -1,10 +1,109 @@
+
+$.ajax({
+  method: "GET",
+  url: "http://imdc-ofs-4:8083/api/project/getsites/?layer_id=4",
+})
+.done(function( response ) {
+    console.log("this is the response", response)
+    var response_sites = response;
+    response.forEach(function(site) {
+        $("#site").append(`<option value=${site.properties.id}>${site.properties.shortname}</option>`);
+    })
+
+
+    jQuery("document").ready(function () {
+        // The DOM is ready!
+        // The rest of the code goes here
+
+
+        jQuery("#site").on("change", function() {
+
+        
+                var selectedValue = jQuery(this).val();
+                response_sites.forEach(function(site) {
+                    if (site.properties.id=selectedValue)  {
+                        site.properties.variables.forEach(function(variable){
+                                $("#variable").append(`<option value=${variable.id}>${variable.variablename}</option>`);
+                        })
+                    }
+                })
+        })
+
+
+        jQuery("#variable").on("change", function() {
+        $.ajax({
+        method: "GET",
+        url: "http://imdc-ofs-4:8083/api/timeseries/getdata/?format=json&Site_id=565&SiteVariable_id=1074",
+        })
+        .done(function( response ) {
+            // The DOM is ready!
+            // The rest of the code goes here
+            console.log("this is the response", response)
+            $('#chart').highcharts({
+                title: {
+                    text: $("#site option:selected").text(),
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: $("#variable option:selected").text(),
+                    x: -20
+                },
+               xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: $("#variable option:selected").text()
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '°C'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: 'Tokyo',
+                    data: response[0].data.value
+                }]
+            });
+            })
+            
+        });
+    });
+});
+
 jQuery("document").ready(function () {
     // The DOM is ready!
     // The rest of the code goes here
 
+    jQuery("#plot_data").on("click", function() {
+        console.log("plot_data")
+
+    })
+
+
+});
+
+$.ajax({
+  method: "GET",
+  url: "http://imdc-ofs-1/api/timeseries/getdata/?format=json&Site_id=95&scenario_id=1901",
+})
+.done(function( response ) {
+    // The DOM is ready!
+    // The rest of the code goes here
+    
     $('#chart').highcharts({
         title: {
-            text: 'Monthly Average Temperature',
+            text: jQuery("#site").val(),
             x: -20 //center
         },
         subtitle: {
