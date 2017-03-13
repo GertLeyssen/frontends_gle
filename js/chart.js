@@ -20,9 +20,19 @@ $.ajax({
 
         
                 var selectedValue = jQuery(this).val();
+                console.log(selectedValue)
+                //document.getElementById("variable").options.length = 0;
+                document.getElementById("variable").innerHTML = "";
                 response_sites.forEach(function(site) {
-                    if (site.properties.id=selectedValue)  {
+                    console.log(site)
+                    //debugger
+                    
+                    //$("#variable").options.length = 0
+                    if (site.properties.id==parseInt(selectedValue))  {
+                        //console.log(site.properties.id)
+                        //console.log(site)
                         site.properties.variables.forEach(function(variable){
+                                //console.log(variable)
                                 $("#variable").append(`<option value=${variable.id}>${variable.variablename}</option>`);
                         })
                     }
@@ -31,11 +41,15 @@ $.ajax({
 
 
         jQuery("#variable").on("change", function() {
+
         $.ajax({
-        method: "GET",
-        url: "http://imdc-ofs-4:8083/api/timeseries/getdata/?format=json&Site_id=565&SiteVariable_id=1074",
+            method: "GET",
+            //url: "http://imdc-ofs-4:8083/api/timeseries/getdata/?format=json&Site_id=565&SiteVariable_id=1074",
+
+            url: "http://imdc-ofs-4:8083/api/timeseries/getdata/?format=json&Site_id=" + jQuery("#site").val() + "&SiteVariable_id=" + jQuery("#variable").val(),
         })
         .done(function( response ) {
+            // console.log("http://imdc-ofs-1/api/timeseries/getdata/?format=json&Site_id=" + jQuery("#site").val() + "&SiteVariable_id=" + jQuery("#variable").val()),
             // The DOM is ready!
             // The rest of the code goes here
             console.log("this is the response", response)
@@ -71,7 +85,7 @@ $.ajax({
                     borderWidth: 0
                 },
                 series: [{
-                    name: 'Tokyo',
+                    name: $("#site option:selected").text(),
                     data: response[0].data.value
                 }]
             });
@@ -96,11 +110,13 @@ jQuery("document").ready(function () {
 $.ajax({
   method: "GET",
   url: "http://imdc-ofs-1/api/timeseries/getdata/?format=json&Site_id=95&scenario_id=1901",
+  //url: "http://imdc-ofs-1/api/timeseries/getdata/?format=json&Site_id=" + jQuery("#site").val() + "&SiteVariable_id=" + jQuery("#variable").val(),
+  
 })
 .done(function( response ) {
     // The DOM is ready!
     // The rest of the code goes here
-    
+    //console.log("http://imdc-ofs-1/api/timeseries/getdata/?format=json&Site_id=" + jQuery("#site").val() + "&SiteVariable_id=" + jQuery("#variable").val()),
     $('#chart').highcharts({
         title: {
             text: jQuery("#site").val(),
